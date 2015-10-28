@@ -1,34 +1,41 @@
 import React from "react";
+import {Jumbotron, Grid, Col, Row, Table} from "react-bootstrap"
 
 export default React.createClass({
 	render: function () {
 		return (
-			<div className="container theme-showcase" role="main">
-				<Jumbotron/>
-				<IncidentList incidents={INCIDENTS.data}/>
+			<div className="container" role="main">
+				<Jumbotron>
+					<h1>EADP Social Service Status</h1>
+
+					<p>How's it going?</p>
+				</Jumbotron>
+				<PageContent/>
 			</div>
 		);
 	}
 });
 
-var Jumbotron = React.createClass({
+var PageContent = React.createClass({
 	render: function () {
-		return (
-			<div className="jumbotron">
-				<h1>EADP Social Service Status</h1>
-
-				<p>How's it going?</p>
-			</div>
-		);
+		return (<Grid>
+			<Row>
+				<Col md={8}>
+					<IncidentList incidents={INCIDENTS.data}/>
+				</Col>
+				<Col md={4}>
+					<ServicesList services={SERVICES.data}/>
+				</Col>
+			</Row>
+		</Grid>);
 	}
 });
 
 var IncidentList = React.createClass({
 	render: function () {
-		console.debug(this.props)
 		var incidentNodes = this.props.incidents.map(incident =>
 				<Incident key={incident.id} incident={incident}/>
-		)
+		);
 		return (
 			<div className="currentIssues">
 				{incidentNodes}
@@ -48,6 +55,27 @@ var Incident = React.createClass({
 
 				<p className="issue-updated">last updated {this.props.incident.updatedAt}</p>
 			</div>
+		);
+	}
+});
+
+var ServicesList = React.createClass({
+	render: function() {
+		var tableRows = this.props.services.map(service => <tr key={service.id}>
+			<td>{service.name}</td>
+			<td>{service.serviceStatus.name}</td>
+		</tr>);
+
+		return (
+			<Table>
+				<thead>
+				<th>Service Name</th>
+				<th>Status</th>
+				</thead>
+				<tbody>
+				{tableRows}
+				</tbody>
+			</Table>
 		);
 	}
 });
@@ -139,3 +167,20 @@ var INCIDENTS = {
 		}
 	]
 };
+
+var SERVICES = {
+	"data": [
+		{
+			"id": "034db69f-9a6e-48be-b154-ded387ca1b2e",
+			"name": "asdf",
+			"description": "asdf",
+			"serviceStatus": {
+				"id": "ok",
+				"name": "Operational",
+				"displayColor": "2FCC66"
+			},
+			"createdAt": "2015-10-24T22:08:43.703Z",
+			"updatedAt": "2015-10-24T22:08:43.703Z"
+		}
+	]
+}
