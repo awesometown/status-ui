@@ -1,10 +1,12 @@
+var path = require('path');
+
 module.exports = {
-	context: __dirname + "\\app",
-	entry: ".\\app.js",
+	context: path.resolve(__dirname, "app"),
+	entry: "." + path.sep + "app.js",
 
 	output: {
 		filename: "app.js",
-		path: __dirname + "\\dist",
+		path: path.resolve(__dirname," dist"),
 	},
 	module: {
 		loaders: [
