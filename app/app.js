@@ -1,10 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Router, Route, Link } from "react-router"
 import Dashboard from "./dashboard";
 
 require("./theme.css");
 
-ReactDOM.render(
-	<Dashboard/>,
-	document.getElementById('dashboard')
+const App = React.createClass({
+	render() {
+		return (
+			<div>
+				{this.props.children}
+			</div>
+		);
+	}
+})
+
+ReactDOM.render((
+		<Router>
+			<Route path="/" component={App}>
+				<IndexRoute component={Dashboard}/>
+			</Route>
+		</Router>
+	), document.getElementById('app')
 );

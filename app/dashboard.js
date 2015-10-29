@@ -60,7 +60,7 @@ var Incident = React.createClass({
 });
 
 var ServicesList = React.createClass({
-	render: function() {
+	render: function () {
 		var tableRows = this.props.services.map(service => <tr key={service.id}>
 			<td>{service.name}</td>
 			<td>{service.serviceStatus.name}</td>
@@ -69,8 +69,10 @@ var ServicesList = React.createClass({
 		return (
 			<Table>
 				<thead>
-				<th>Service Name</th>
-				<th>Status</th>
+				<tr>
+					<th>Service Name</th>
+					<th>Status</th>
+				</tr>
 				</thead>
 				<tbody>
 				{tableRows}
