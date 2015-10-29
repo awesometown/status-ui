@@ -1,5 +1,7 @@
 import React from "react";
+import { Link } from "react-router";
 import {Jumbotron, Grid, Col, Row, Table} from "react-bootstrap"
+
 
 export default React.createClass({
 	render: function () {
@@ -46,15 +48,16 @@ var IncidentList = React.createClass({
 
 var Incident = React.createClass({
 	render: function () {
-		var className = 'alert incident-' + this.props.incident.serviceStatusId;
+		var incident = this.props.incident;
+		var className = 'alert incident-' + incident.serviceStatusId;
 		return (
-			<div className={className}>
-				<p className="issue-state">{this.props.incident.state}</p>
-
-				<h2>{this.props.incident.title}</h2>
-
-				<p className="issue-updated">last updated {this.props.incident.updatedAt}</p>
-			</div>
+			<Link to={`/incidents/${incident.id}`}>
+				<div className={className}>
+					<p className="issue-state">{incident.state}</p>
+					<h2>{incident.title}</h2>
+					<p className="issue-updated">last updated {incident.updatedAt}</p>
+				</div>
+			</Link>
 		);
 	}
 });

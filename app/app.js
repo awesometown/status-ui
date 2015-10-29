@@ -1,14 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Router, Route, Link } from "react-router"
+import { Router, Route, IndexRoute, Link } from "react-router";
+import createBrowserHistory from 'history/lib/createBrowserHistory';
 import Dashboard from "./dashboard";
+import IncidentDetails from "./incident";
 
 require("./theme.css");
 
 const App = React.createClass({
 	render() {
 		return (
-			<div>
+			<div id="app">
 				{this.props.children}
 			</div>
 		);
@@ -16,10 +18,11 @@ const App = React.createClass({
 })
 
 ReactDOM.render((
-		<Router>
+		<Router history={createBrowserHistory()}>
 			<Route path="/" component={App}>
 				<IndexRoute component={Dashboard}/>
+				<Route path="incidents/:incidentId" component={IncidentDetails}/>
 			</Route>
 		</Router>
-	), document.getElementById('app')
+	), document.getElementById('app-container')
 );
