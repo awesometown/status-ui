@@ -15,7 +15,7 @@ const App = React.createClass({
 			</div>
 		);
 	}
-})
+});
 
 ReactDOM.render((
 		<Router history={createBrowserHistory()}>
