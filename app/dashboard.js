@@ -21,7 +21,7 @@ export default React.createClass({
 				}
 			}).catch(result => console.log(result));
 
-		StatusClient.getIncidents()
+		StatusClient.getActiveIncidents()
 			.then(result => {
 				if (this.isMounted()) {
 					this.setState({incidents: result.data.data});
