@@ -1,7 +1,7 @@
 import React from "react";
 import {Grid, Col, Row, Table} from "react-bootstrap";
 import {Link} from "react-router";
-import StatusClient from "./clients/statusclient";
+import { StatusClient } from "./globals";
 import moment from "moment";
 
 export default React.createClass({
@@ -20,8 +20,7 @@ export default React.createClass({
 	componentDidMount: function () {
 		var location = window.location.href;
 		var instanceId = location.substring(location.lastIndexOf('/') + 1);
-		var statusClient = new StatusClient("http://localhost:9000");
-		statusClient.getIncident(instanceId)
+		StatusClient.getIncident(instanceId)
 			.then(result => {
 				if (this.isMounted()) {
 					this.setState({incident: result.data});

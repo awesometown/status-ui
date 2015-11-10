@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import {Jumbotron, Grid, Col, Row, Table} from "react-bootstrap";
-import StatusClient from "./clients/statusclient";
+import { StatusClient } from "./globals";
 import moment from "moment";
 
 export default React.createClass({
@@ -13,8 +13,7 @@ export default React.createClass({
 	},
 
 	componentDidMount: function () {
-		var statusClient = new StatusClient("http://localhost:9000");
-		statusClient.getServices()
+		StatusClient.getServices()
 			.then(result => {
 				if (this.isMounted()) {
 					this.setState({services: result.data.data});
@@ -22,7 +21,7 @@ export default React.createClass({
 				}
 			}).catch(result => console.log(result));
 
-		statusClient.getIncidents()
+		StatusClient.getIncidents()
 			.then(result => {
 				if (this.isMounted()) {
 					this.setState({incidents: result.data.data});
